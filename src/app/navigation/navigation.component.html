@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#dashboard">Dashboard</a>
+      <a mat-list-item href="#address-form">Address Form</a>
+      <a mat-list-item href="#table">Table</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      @if (isHandset$ | async) {
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
+      <span>angular-material-19-theming</span>
+      <p class="theme-toggle">
+        <mat-icon>light_mode</mat-icon>
+        <mat-slide-toggle (change)="onThemeChange($event)"></mat-slide-toggle>
+        <mat-icon>dark_mode</mat-icon>
+      </p>
+
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
